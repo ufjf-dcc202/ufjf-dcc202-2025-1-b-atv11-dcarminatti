@@ -1,4 +1,9 @@
-import { getLista, adicionaNaLista, removeDaLista, limpaLista } from "./lista.js";
+import {
+  getLista,
+  adicionaNaLista,
+  removeDaLista,
+  limpaLista,
+} from "./lista.js";
 
 const olItens = document.getElementById("itens");
 const pEntrada = document.getElementById("entrada");
@@ -16,5 +21,38 @@ function atualizarLista() {
     olItens.appendChild(li);
   });
 }
+
+function limpaItensDeLista() {
+  limpaLista();
+  atualizarLista();
+}
+
+function adicionarItem() {
+  const item = pEntrada.textContent.trim();
+  if (item) {
+    adicionaNaLista(item);
+    pEntrada.textContent = "";
+    atualizarLista();
+  }
+}
+
+function removerItem() {
+  const input = prompt(
+    "Digite o índice do item a ser removido (começando de 0):"
+  );
+  const index = parseInt(input, 10) - 1;
+  if (!isNaN(index) && index >= 0 && index < getLista().length) {
+    removeDaLista(index);
+    atualizarLista();
+  } else {
+    alert("Por favor, insira um número válido.");
+  }
+  pEntrada.textContent = "";
+  atualizarLista();
+}
+
+btnLimpar.addEventListener("click", limpaItensDeLista);
+btnAdicionar.addEventListener("click", adicionarItem);
+btnRemover.addEventListener("click", removerItem);
 
 atualizarLista();
