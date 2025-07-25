@@ -15,5 +15,5 @@ export function removeDaLista(posicao) {
 }
 
 export function limpaLista() {
-  lista = [];
+  lista.splice(0);
 }
